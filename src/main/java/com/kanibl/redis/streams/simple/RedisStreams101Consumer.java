@@ -22,7 +22,7 @@ public class RedisStreams101Consumer {
             syncCommands.xgroupCreate( XReadArgs.StreamOffset.from(STREAMS_KEY, "0-0"), "application_1"  );
         }
         catch (RedisBusyException redisBusyException) {
-            System.out.println( String.format("\t Group '%s already' exists","application_1"));
+            System.out.println( String.format("\t Group '%s' already exists", "application_1"));
         }
 
 
@@ -39,13 +39,8 @@ public class RedisStreams101Consumer {
                 System.out.println( messages );
             }
 
-
         }
 
-
-
-
     }
-
 
 }
