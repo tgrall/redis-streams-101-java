@@ -5,6 +5,7 @@ import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
 
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RedisStreams101Consumer {
@@ -36,8 +37,13 @@ public class RedisStreams101Consumer {
             );
 
             if (!messages.isEmpty()) {
-                System.out.println( messages );
+                for (StreamMessage<String, String> message : messages) {
+                    System.out.println(message);
+                    // Confirm that the message has been processed using XACK
+                    syncCommands.xack(STREAMS_KEY, "application_1",  message.getId());
+                }
             }
+
 
         }
 
